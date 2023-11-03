@@ -1,7 +1,7 @@
 package com.abogomazov.glidedrose.approval
 
 import com.abogomazov.glidedrose.GildedRose
-import com.abogomazov.glidedrose.Item
+import com.abogomazov.glidedrose.thirdparty.Item
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

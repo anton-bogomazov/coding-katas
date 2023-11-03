@@ -1,5 +1,7 @@
 package com.abogomazov.glidedrose
 
+import com.abogomazov.glidedrose.thirdparty.Item
+
 class GildedRose(var items: List<Item>) {
 
     fun updateQuality() {

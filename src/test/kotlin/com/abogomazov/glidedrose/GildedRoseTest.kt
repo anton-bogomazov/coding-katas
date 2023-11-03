@@ -1,5 +1,6 @@
 package com.abogomazov.glidedrose
 
+import com.abogomazov.glidedrose.thirdparty.Item
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
