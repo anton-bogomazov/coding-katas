@@ -1,12 +1,8 @@
 package com.abogomazov.glidedrose.approval
 
 import com.abogomazov.glidedrose.GlidedRoseApplication
-import com.abogomazov.glidedrose.item.AgingItem
-import com.abogomazov.glidedrose.item.ConjuredItem
-import com.abogomazov.glidedrose.item.HypingItem
+import com.abogomazov.glidedrose.GlidedRoseItemFactory
 import com.abogomazov.glidedrose.item.Item
-import com.abogomazov.glidedrose.item.LegendaryItem
-import com.abogomazov.glidedrose.item.RegularItem
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -16,19 +12,20 @@ class GlidedRoseApprovalTest {
     fun `items degrade properly`() {
         val expectedOutput = resource("approval-test-expected-out")
         val items = listOf(
-            RegularItem.of("+5 Dexterity Vest", 10, 20),
-            AgingItem.of("Aged Brie", 2, 0),
-            RegularItem.of("Elixir of the Mongoose", 5, 7),
-            LegendaryItem.of("Sulfuras, Hand of Ragnaros", 0, 80),
-            LegendaryItem.of("Sulfuras, Hand of Ragnaros", -1, 80),
-            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-            ConjuredItem.of("Conjured Mana Cake", 3, 6)
-        )
+            Triple("+5 Dexterity Vest", 10, 20),
+            Triple("Aged Brie", 2, 0),
+            Triple("Elixir of the Mongoose", 5, 7),
+            Triple("Sulfuras, Hand of Ragnaros", 0, 80),
+            Triple("Sulfuras, Hand of Ragnaros", -1, 80),
+            Triple("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+            Triple("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+            Triple("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+            Triple("Conjured Mana Cake", 3, 6)
+        ).map { (name, sellIn, quality) ->
+            GlidedRoseItemFactory.create(name, sellIn, quality)
+        }
         assertEquals(expectedOutput, runApp(items))
     }
-
 }
 
 private fun resource(filename: String) =
