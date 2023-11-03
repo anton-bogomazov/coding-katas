@@ -14,7 +14,7 @@ class RegularItem private constructor(
     }
 
     override fun age() {
-        this.decreaseQuality()
+        this.decreaseQualityBy(1)
         this.decreaseSellIn()
     }
 }

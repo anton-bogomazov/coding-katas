@@ -20,8 +20,8 @@ abstract class Item(
         thirdPartyItem.quality = min(getQuality() + value, 50)
     }
 
-    internal fun decreaseQuality() {
-        thirdPartyItem.quality = max(getQuality() - 1, 0)
+    internal fun decreaseQualityBy(value: Int) {
+        thirdPartyItem.quality = max(getQuality() - value, 0)
     }
 
     internal fun resetQuality() {

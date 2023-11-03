@@ -46,14 +46,14 @@ class ItemTest {
     @Test
     fun `quality can be decreased by 1`() {
         val sut = bread()
-        sut.decreaseQuality()
+        sut.decreaseQualityBy(1)
         assertEquals(4, sut.getQuality())
     }
 
     @Test
     fun `quality can't be lower than 0`() {
         val sut = poorManBread()
-        sut.decreaseQuality()
+        sut.decreaseQualityBy(1)
         assertEquals(0, sut.getQuality())
     }
 
