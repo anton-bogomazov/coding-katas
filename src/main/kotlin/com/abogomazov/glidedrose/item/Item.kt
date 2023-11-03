@@ -15,20 +15,21 @@ abstract class Item(
 
     fun getSellIn() = thirdPartyItem.sellIn
 
-    internal fun increaseQualityBy(value: Int) {
+    protected fun increaseQualityBy(value: Int) {
         assert(value >= 0)
         thirdPartyItem.quality = min(getQuality() + value, 50)
     }
 
-    internal fun decreaseQualityBy(value: Int) {
+    protected fun decreaseQualityBy(value: Int) {
+        assert(value >= 0)
         thirdPartyItem.quality = max(getQuality() - value, 0)
     }
 
-    internal fun resetQuality() {
+    protected fun resetQuality() {
         thirdPartyItem.quality = 0
     }
 
-    internal fun decreaseSellIn() {
+    protected fun decreaseSellIn() {
         thirdPartyItem.sellIn -= 1
     }
 

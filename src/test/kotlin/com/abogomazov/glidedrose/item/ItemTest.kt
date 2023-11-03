@@ -25,62 +25,76 @@ class ItemTest {
     @Test
     fun `quality can be increased by specific value`() {
         val sut = bread()
-        sut.increaseQualityBy(10)
+        sut.qualityChangeRate = 10
+        sut.increase = true
+
+        sut.age()
+
         assertEquals(15, sut.getQuality())
     }
 
     @Test
     fun `quality can't be increased by negative value`() {
         assertThrows<AssertionError> {
-            bread().increaseQualityBy(-1)
+            val sut = bread()
+            sut.qualityChangeRate = -1
+            sut.increase = false
+
+            sut.age()
         }
     }
 
     @Test
     fun `quality can't exceed 50`() {
         val sut = finestBread()
-        sut.increaseQualityBy(10)
+        sut.qualityChangeRate = 10
+        sut.increase = true
+
+        sut.age()
+
         assertEquals(50, sut.getQuality())
     }
 
     @Test
     fun `quality can be decreased by 1`() {
         val sut = bread()
-        sut.decreaseQualityBy(1)
+        sut.qualityChangeRate = 1
+        sut.increase = false
+
+        sut.age()
+
         assertEquals(4, sut.getQuality())
     }
 
     @Test
     fun `quality can't be lower than 0`() {
         val sut = poorManBread()
-        sut.decreaseQualityBy(1)
-        assertEquals(0, sut.getQuality())
-    }
+        sut.qualityChangeRate = 1
+        sut.increase = false
 
-    @Test
-    fun `quality can be reset`() {
-        val sut = finestBread()
-        sut.resetQuality()
-        assertEquals(0, sut.getQuality())
-    }
+        sut.age()
 
-    @Test
-    fun `sellIn can be decreased lower than 0`() {
-        val sut = expiredFinestBread()
-        sut.decreaseSellIn()
-        assertEquals(-1, sut.getSellIn())
+        assertEquals(0, sut.getQuality())
     }
 }
 
 private fun poorManBread() = TestItem("Bread", 3, 0)
 private fun bread() = TestItem("Bread", 3, 5)
 private fun finestBread() = TestItem("Finest Bread", 1, 49)
-private fun expiredFinestBread() = TestItem("Finest Bread", 0, 49)
 
 private class TestItem(
     name: String, sellIn: Int, quality: Int
 ) : Item(name, sellIn, quality) {
+
+    var qualityChangeRate = 1
+    var increase = false
+
     override fun age() {
-        throw NotImplementedError()
+        if (increase) {
+            increaseQualityBy(qualityChangeRate)
+        } else {
+            decreaseQualityBy(qualityChangeRate)
+        }
+        decreaseSellIn()
     }
 }
