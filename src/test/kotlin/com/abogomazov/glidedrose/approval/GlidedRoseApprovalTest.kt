@@ -1,7 +1,12 @@
 package com.abogomazov.glidedrose.approval
 
-import com.abogomazov.glidedrose.GildedRose
-import com.abogomazov.glidedrose.thirdparty.Item
+import com.abogomazov.glidedrose.GlidedRoseApplication
+import com.abogomazov.glidedrose.item.AgingItem
+import com.abogomazov.glidedrose.item.ConjuredItem
+import com.abogomazov.glidedrose.item.HypingItem
+import com.abogomazov.glidedrose.item.Item
+import com.abogomazov.glidedrose.item.LegendaryItem
+import com.abogomazov.glidedrose.item.RegularItem
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -11,16 +16,16 @@ class GlidedRoseApprovalTest {
     fun `items degrade properly`() {
         val expectedOutput = resource("approval-test-expected-out")
         val items = listOf(
-            Item("+5 Dexterity Vest", 10, 20),
-            Item("Aged Brie", 2, 0),
-            Item("Elixir of the Mongoose", 5, 7),
-            Item("Sulfuras, Hand of Ragnaros", 0, 80),
-            Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+            RegularItem.of("+5 Dexterity Vest", 10, 20),
+            AgingItem.of("Aged Brie", 2, 0),
+            RegularItem.of("Elixir of the Mongoose", 5, 7),
+            LegendaryItem.of("Sulfuras, Hand of Ragnaros", 0, 80),
+            LegendaryItem.of("Sulfuras, Hand of Ragnaros", -1, 80),
+            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+            HypingItem.of("Backstage passes to a TAFKAL80ETC concert", 5, 49),
             // this conjured item does not work properly yet
-            Item("Conjured Mana Cake", 3, 6)
+            ConjuredItem.of("Conjured Mana Cake", 3, 6)
         )
         assertEquals(expectedOutput, runApp(items))
     }
@@ -33,7 +38,7 @@ private fun resource(filename: String) =
         .reader().readText()
 
 private fun runApp(items: List<Item>): String {
-    val app = GildedRose(items)
+    val app = GlidedRoseApplication.with(items)
 
     return buildString {
         for (i in 0..30) {
@@ -43,7 +48,7 @@ private fun runApp(items: List<Item>): String {
                 appendLine(item)
             }
             appendLine()
-            app.updateQuality()
+            app.run()
         }
     }
 }
