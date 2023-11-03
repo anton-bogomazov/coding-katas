@@ -14,11 +14,9 @@ class RegularItem private constructor(
     }
 
     override fun age() {
-        if (getSellIn() <= 0) {
-            decreaseQualityBy(2)
-        } else {
-            decreaseQualityBy(1)
-        }
+        decreaseQualityBy(qualityChangeRate())
         decreaseSellIn()
     }
+
+    private fun qualityChangeRate() = if (isExpired()) 2 else 1
 }

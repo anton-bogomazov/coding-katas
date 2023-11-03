@@ -11,15 +11,12 @@ class AgingItem private constructor(
             assert(quality <= 50)
             return AgingItem(name, sellIn, quality)
         }
-
     }
 
     override fun age() {
-        if (getSellIn() <= 0) {
-            increaseQualityBy(2)
-        } else {
-            increaseQualityBy(1)
-        }
+        increaseQualityBy(qualityChangeRate())
         decreaseSellIn()
     }
+
+    private fun qualityChangeRate() = if (isExpired()) 2 else 1
 }

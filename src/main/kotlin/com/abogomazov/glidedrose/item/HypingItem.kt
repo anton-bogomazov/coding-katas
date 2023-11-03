@@ -15,12 +15,18 @@ class HypingItem private constructor(
     }
 
     override fun age() {
-        when (getSellIn()) {
-            in Int.MIN_VALUE..0 -> resetQuality()
-            in 1..5 -> increaseQualityBy(3)
-            in 6..10 -> increaseQualityBy(2)
-            else -> increaseQualityBy(1)
+        if (isExpired()) {
+            resetQuality()
+        } else {
+            increaseQualityBy(qualityChangeRate())
         }
         decreaseSellIn()
     }
+
+    private fun qualityChangeRate() =
+        when (getSellIn()) {
+            in 1..5 -> 3
+            in 6..10 -> 2
+            else -> 1
+        }
 }

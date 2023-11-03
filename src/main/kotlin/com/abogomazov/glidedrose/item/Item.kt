@@ -35,3 +35,5 @@ abstract class Item(
 
     override fun toString() = thirdPartyItem.toString()
 }
+
+fun Item.isExpired() = getSellIn() <= 0
