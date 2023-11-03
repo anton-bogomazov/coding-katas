@@ -14,8 +14,7 @@ class ConjuredItem private constructor(
     }
 
     override fun age() {
-        decreaseQualityBy(1)
-        decreaseQualityBy(1)
+        decreaseQualityBy(2)
         decreaseSellIn()
     }
 }
