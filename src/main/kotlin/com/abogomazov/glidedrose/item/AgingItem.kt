@@ -15,7 +15,11 @@ class AgingItem private constructor(
     }
 
     override fun age() {
-        increaseQualityBy(1)
+        if (getSellIn() <= 0) {
+            increaseQualityBy(2)
+        } else {
+            increaseQualityBy(1)
+        }
         decreaseSellIn()
     }
 }

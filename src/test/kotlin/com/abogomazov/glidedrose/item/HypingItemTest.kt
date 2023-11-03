@@ -31,6 +31,14 @@ class HypingItemTest {
         assertEquals(13, sut.getQuality())
     }
 
+    @Test
+    fun `quality is 0 if expired`() {
+        val sut = fanZoneTicket(0)
+        sut.age()
+        assertEquals(-1, sut.getSellIn())
+        assertEquals(0, sut.getQuality())
+    }
+
 
     @Test
     fun `can't create with quality exceeds 50`() {
@@ -41,9 +49,9 @@ class HypingItemTest {
 
     @Test
     fun `quality of expired items is 0`() {
-        val sut = fanZoneTicket(-1)
+        val sut = fanZoneTicket(0)
         sut.age()
-        assertEquals(-2, sut.getSellIn())
+        assertEquals(-1, sut.getSellIn())
         assertEquals(0, sut.getQuality())
     }
 }
