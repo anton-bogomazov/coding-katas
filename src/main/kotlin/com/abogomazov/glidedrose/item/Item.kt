@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.glidedrose.item
 
 import kotlin.math.max
 import kotlin.math.min

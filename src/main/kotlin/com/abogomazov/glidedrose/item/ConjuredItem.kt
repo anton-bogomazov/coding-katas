@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.glidedrose.item
 
 class ConjuredItem private constructor(
     name: String,

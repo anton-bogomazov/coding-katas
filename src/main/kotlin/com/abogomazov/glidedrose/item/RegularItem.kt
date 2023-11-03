@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.glidedrose.item
 
 class RegularItem private constructor(
     name: String,

@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.glidedrose.item
 
 class AgingItem private constructor(
     name: String,

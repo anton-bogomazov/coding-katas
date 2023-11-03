@@ -1,8 +1,6 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.glidedrose.item
 
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import java.lang.AssertionError
 import kotlin.test.assertEquals
 
 class LegendaryItemTest {
