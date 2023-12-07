@@ -9,4 +9,6 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
-rootProject.name = "gilded-rose-kata"
+rootProject.name = "coding-katas"
+
+include(":gilded-rose")
