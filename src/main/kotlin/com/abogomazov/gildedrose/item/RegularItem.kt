@@ -1,20 +1,20 @@
-package com.abogomazov.glidedrose.item
+package com.abogomazov.gildedrose.item
 
-class AgingItem private constructor(
+class RegularItem private constructor(
     name: String,
     sellIn: Int,
     quality: Int
 ) : Item(name, sellIn, quality) {
 
     companion object {
-        fun of(name: String, sellIn: Int, quality: Int): AgingItem {
+        fun of(name: String, sellIn: Int, quality: Int): RegularItem {
             assert(quality <= 50)
-            return AgingItem(name, sellIn, quality)
+            return RegularItem(name, sellIn, quality)
         }
     }
 
     override fun age() {
-        increaseQualityBy(qualityChangeRate())
+        decreaseQualityBy(qualityChangeRate())
         decreaseSellIn()
     }
 

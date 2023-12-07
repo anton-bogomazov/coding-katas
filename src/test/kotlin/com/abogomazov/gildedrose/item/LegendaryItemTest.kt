@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose.item
+package com.abogomazov.gildedrose.item
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

@@ -1,8 +1,8 @@
-package com.abogomazov.glidedrose.approval
+package com.abogomazov.gildedrose.approval
 
-import com.abogomazov.glidedrose.GlidedRoseApplication
-import com.abogomazov.glidedrose.GlidedRoseItemFactory
-import com.abogomazov.glidedrose.item.Item
+import com.abogomazov.gildedrose.GlidedRoseApplication
+import com.abogomazov.gildedrose.GlidedRoseItemFactory
+import com.abogomazov.gildedrose.item.Item
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

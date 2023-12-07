@@ -1,8 +1,8 @@
-package com.abogomazov.glidedrose.item
+package com.abogomazov.gildedrose.item
 
 import kotlin.math.max
 import kotlin.math.min
-import com.abogomazov.glidedrose.thirdparty.Item as TpItem
+import com.abogomazov.gildedrose.thirdparty.Item as TpItem
 
 abstract class Item(
     name: String, sellIn: Int, quality: Int

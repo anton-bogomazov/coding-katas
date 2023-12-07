@@ -1,6 +1,6 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.gildedrose
 
-import com.abogomazov.glidedrose.item.Item
+import com.abogomazov.gildedrose.item.Item
 
 class GlidedRoseApplication private constructor(
     private val items: List<Item>

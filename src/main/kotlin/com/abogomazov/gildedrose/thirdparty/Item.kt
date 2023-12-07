@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose.thirdparty
+package com.abogomazov.gildedrose.thirdparty
 
 open class Item(var name: String, var sellIn: Int, var quality: Int) {
     override fun toString(): String {

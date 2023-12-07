@@ -1,11 +1,11 @@
-package com.abogomazov.glidedrose
+package com.abogomazov.gildedrose
 
-import com.abogomazov.glidedrose.item.AgingItem
-import com.abogomazov.glidedrose.item.ConjuredItem
-import com.abogomazov.glidedrose.item.HypingItem
-import com.abogomazov.glidedrose.item.Item
-import com.abogomazov.glidedrose.item.LegendaryItem
-import com.abogomazov.glidedrose.item.RegularItem
+import com.abogomazov.gildedrose.item.AgingItem
+import com.abogomazov.gildedrose.item.ConjuredItem
+import com.abogomazov.gildedrose.item.HypingItem
+import com.abogomazov.gildedrose.item.Item
+import com.abogomazov.gildedrose.item.LegendaryItem
+import com.abogomazov.gildedrose.item.RegularItem
 
 object GlidedRoseItemFactory {
     fun create(name: String, sellIn: Int, quality: Int): Item {

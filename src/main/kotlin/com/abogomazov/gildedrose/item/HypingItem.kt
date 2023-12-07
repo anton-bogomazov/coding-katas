@@ -1,4 +1,4 @@
-package com.abogomazov.glidedrose.item
+package com.abogomazov.gildedrose.item
 
 class HypingItem private constructor(
     name: String,
