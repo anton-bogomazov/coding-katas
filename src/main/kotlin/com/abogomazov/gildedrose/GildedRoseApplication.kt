@@ -2,11 +2,11 @@ package com.abogomazov.gildedrose
 
 import com.abogomazov.gildedrose.item.Item
 
-class GlidedRoseApplication private constructor(
+class GildedRoseApplication private constructor(
     private val items: List<Item>
 ) {
     companion object {
-        fun with(items: List<Item>) = GlidedRoseApplication(items)
+        fun with(items: List<Item>) = GildedRoseApplication(items)
     }
 
     fun run() {

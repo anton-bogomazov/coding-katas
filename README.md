@@ -28,7 +28,7 @@ To do it, I was forced to implement complex Test Item Fake with ugly setting up 
 Items can be instantiated with Static Factory Methods because it is a good place to put validations and construction logic in. 
 Factories throw AssertionError as a Validation Error for simplicity. 
 
-Probably, a client doesn't want to know about Items' so I added GlidedRoseFactory as a high-level API which 
+Probably, a client doesn't want to know about Items' so I added GildedRoseFactory as a high-level API which 
 encapsulates Item name pattern -> Item type matching logic. 
 
 _Time spent: 3 hours_

@@ -1,12 +1,12 @@
 package com.abogomazov.gildedrose.approval
 
-import com.abogomazov.gildedrose.GlidedRoseApplication
-import com.abogomazov.gildedrose.GlidedRoseItemFactory
+import com.abogomazov.gildedrose.GildedRoseApplication
+import com.abogomazov.gildedrose.GildedRoseItemFactory
 import com.abogomazov.gildedrose.item.Item
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class GlidedRoseApprovalTest {
+class GildedRoseApprovalTest {
 
     @Test
     fun `items degrade properly`() {
@@ -22,19 +22,19 @@ class GlidedRoseApprovalTest {
             Triple("Backstage passes to a TAFKAL80ETC concert", 5, 49),
             Triple("Conjured Mana Cake", 3, 6)
         ).map { (name, sellIn, quality) ->
-            GlidedRoseItemFactory.create(name, sellIn, quality)
+            GildedRoseItemFactory.create(name, sellIn, quality)
         }
         assertEquals(expectedOutput, runApp(items))
     }
 }
 
 private fun resource(filename: String) =
-    GlidedRoseApprovalTest::class.java
+    GildedRoseApprovalTest::class.java
         .getResourceAsStream("/$filename")!!
         .reader().readText()
 
 private fun runApp(items: List<Item>): String {
-    val app = GlidedRoseApplication.with(items)
+    val app = GildedRoseApplication.with(items)
 
     return buildString {
         for (i in 0..30) {

@@ -7,7 +7,7 @@ import com.abogomazov.gildedrose.item.Item
 import com.abogomazov.gildedrose.item.LegendaryItem
 import com.abogomazov.gildedrose.item.RegularItem
 
-object GlidedRoseItemFactory {
+object GildedRoseItemFactory {
     fun create(name: String, sellIn: Int, quality: Int): Item {
         val trimmedName = name.trim()
         return when {
