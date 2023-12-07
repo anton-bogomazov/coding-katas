@@ -25,3 +25,7 @@ fun planetMapWithObstaclesAt(
             }
         }
     )
+
+fun soleObstacleSquareMap10(
+    obstacleAt: Coordinate = Coordinate(1, 3)
+) = planetMapWithObstaclesAt(listOf(obstacleAt), 10 to 10)

@@ -9,8 +9,8 @@ data class PlanetMap(
 ) {
     fun entityAt(coordinate: Coordinate): MapEntity {
         val (x, y) = coordinate
-        val rY = if (y < 0) map.size + y else y
-        val rX = if (x < 0) map.size + x else x
+        val rY = if (y < 0) map.lastIndex + y % map.lastIndex else y % map.lastIndex
+        val rX = if (x < 0) map.lastIndex + x % map.lastIndex else x % map.lastIndex
 
         return map[rY][rX]
     }
