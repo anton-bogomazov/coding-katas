@@ -2,26 +2,20 @@ package com.abogomazov.marsrover
 
 import com.abogomazov.marsrover.domain.Position
 
-interface MovingCommand {
+fun interface MovingCommand {
     fun execute(position: Position): Position
 }
-object Forward : MovingCommand {
-    override fun execute(position: Position): Position {
-        return position.ahead()
-    }
+
+val MoveForward = MovingCommand { position -> position.ahead() }
+val MoveBackward = MovingCommand { position -> position.behind() }
+
+val TurnLeft = MovingCommand { position ->
+    position.copy(
+        orientation = position.orientation.onLeft()
+    )
 }
-object Backward : MovingCommand {
-    override fun execute(position: Position): Position {
-        return position.behind()
-    }
-}
-object TurnLeft : MovingCommand {
-    override fun execute(position: Position): Position {
-        return position.copy(orientation = position.orientation.onLeft())
-    }
-}
-object TurnRight : MovingCommand {
-    override fun execute(position: Position): Position {
-        return position.copy(orientation = position.orientation.onRight())
-    }
+val TurnRight = MovingCommand { position ->
+    position.copy(
+        orientation = position.orientation.onRight()
+    )
 }

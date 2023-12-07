@@ -12,7 +12,7 @@ class CommandTest {
         val initialPosition = position()
         assertEquals(
             position(coordinate = Coordinate(0, 1)),
-            Forward.execute(initialPosition)
+            MoveForward.execute(initialPosition)
         )
     }
     @Test
@@ -20,7 +20,7 @@ class CommandTest {
         val initialPosition = position()
         assertEquals(
             position(coordinate = Coordinate(0, -1)),
-            Backward.execute(initialPosition)
+            MoveBackward.execute(initialPosition)
         )
     }
     @Test
