@@ -1,5 +1,7 @@
 package com.abogomazov.marsrover
 
+import com.abogomazov.marsrover.domain.Position
+
 interface MovingCommand {
     fun execute(position: Position): Position
 }

@@ -1,5 +1,6 @@
 package com.abogomazov.marsrover
 
+import com.abogomazov.marsrover.domain.position
 import org.junit.jupiter.api.Test
 
 class MarsRoverTest {

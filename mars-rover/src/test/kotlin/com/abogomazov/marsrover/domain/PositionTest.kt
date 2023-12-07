@@ -1,4 +1,4 @@
-package com.abogomazov.marsrover
+package com.abogomazov.marsrover.domain
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

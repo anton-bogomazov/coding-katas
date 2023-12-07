@@ -1,5 +1,8 @@
 package com.abogomazov.marsrover
 
+import com.abogomazov.marsrover.domain.Coordinate
+import com.abogomazov.marsrover.domain.Orientation
+import com.abogomazov.marsrover.domain.position
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
