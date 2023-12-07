@@ -1,15 +1,15 @@
 package com.abogomazov.marsrover
 
 interface MovingCommand {
-    fun execute(coordinate: Coordinate, orientation: Orientation): Coordinate
+    fun execute(position: Position): Position
 }
 object Forward : MovingCommand {
-    override fun execute(coordinate: Coordinate, orientation: Orientation): Coordinate {
-        return coordinate
+    override fun execute(position: Position): Position {
+        return position
     }
 }
 object Backward : MovingCommand {
-    override fun execute(coordinate: Coordinate, orientation: Orientation): Coordinate {
-        return coordinate
+    override fun execute(position: Position): Position {
+        return position
     }
 }

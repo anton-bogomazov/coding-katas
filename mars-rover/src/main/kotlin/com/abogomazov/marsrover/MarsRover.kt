@@ -1,11 +1,15 @@
 package com.abogomazov.marsrover
 
 class MarsRover(
-    private val coordinate: Coordinate,
-    private val orientation: Orientation,
+    private val position: Position,
     private val commands: List<MovingCommand>
 ) {
 }
+
+data class Position(
+    val coordinate: Coordinate,
+    val orientation: Orientation,
+)
 
 data class Coordinate(
     val x: Int,
