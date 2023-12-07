@@ -2,7 +2,8 @@ package com.abogomazov.marsrover
 
 class MarsRover(
     private val coordinate: Coordinate,
-    private val direction: Direction
+    private val direction: Direction,
+    private val commands: List<Command>
 ) {
 }
 
@@ -14,3 +15,5 @@ data class Coordinate(
 enum class Direction {
     N, S, E, W
 }
+
+class Command

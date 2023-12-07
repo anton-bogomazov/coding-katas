@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 
 class MarsRoverTest {
     @Test
-    fun `coordinate and directory are required to initialize rover`() {
-        MarsRover(Coordinate(0, 0), Direction.N)
+    fun `coordinate, directory and list of commands are required to initialize rover`() {
+        MarsRover(Coordinate(0, 0), Direction.N, listOf(Command()))
     }
 }
