@@ -1,22 +1,47 @@
 package com.abogomazov.marsrover
 
 import com.abogomazov.marsrover.domain.Coordinate
+import com.abogomazov.marsrover.domain.freePlanetMap
+import com.abogomazov.marsrover.domain.planetMapWithObstaclesAt
 import com.abogomazov.marsrover.domain.position
 import org.junit.jupiter.api.Test
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
 class MarsRoverTest {
     @Test
     fun `initial position is required to construct the rover`() {
-        MarsRover(position())
+        MarsRover(position(), freePlanetMap(), OneRecordLog())
     }
 
     @Test
     fun `execute updates rover position based on command list`() {
-        val sut = MarsRover(position())
+        val sut = MarsRover(position(), freePlanetMap(), OneRecordLog())
 
         sut.execute(listOf(MoveForward, MoveForward, TurnLeft, MoveBackward, TurnRight, MoveForward))
 
         assertEquals(Coordinate(x = 1, y = 3), sut.coordinate())
+    }
+
+    @Test
+    fun `rollback in case of encountering obstacle`() {
+        val log = OneRecordLog()
+        val sut = MarsRover(position(), planetMapWithObstaclesAt(listOf(Coordinate(2, 1))), log)
+
+        sut.execute(listOf(MoveForward, TurnRight, MoveForward, MoveForward))
+
+        assertEquals(Coordinate(1, 1), sut.coordinate())
+
+        assertContains(log.record, "Obstacle detected")
+        assertContains(log.record, Coordinate(2, 1).toString())
+        assertContains(log.record, Coordinate(1, 1).toString())
+    }
+}
+
+class OneRecordLog : Log {
+    lateinit var record: String
+
+    override fun append(message: String) {
+        record = message
     }
 }
