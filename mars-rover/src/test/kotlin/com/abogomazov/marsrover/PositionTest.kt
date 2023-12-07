@@ -27,4 +27,16 @@ class PositionTest {
             sut.forward()
         )
     }
+
+    @Test
+    fun `forward position could be calculated for any axis`() {
+        val sut = position(orientation = Orientation.W)
+        assertEquals(
+            Position(
+                coordinate = Coordinate(-1, 0),
+                orientation = Orientation.W
+            ),
+            sut.forward()
+        )
+    }
 }
