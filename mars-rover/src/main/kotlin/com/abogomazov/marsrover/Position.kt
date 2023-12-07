@@ -7,11 +7,15 @@ data class Position(
 
     fun forward(): Position =
         this.copy(
-            coordinate = Coordinate(
-                x = if (this.orientation.axis == Axis.X) { this.coordinate.x + this.orientation.delta } else this.coordinate.x,
-                y = if (this.orientation.axis == Axis.Y) { this.coordinate.y + this.orientation.delta } else this.coordinate.y
-            )
+            coordinate = applyDelta { it + this.orientation.delta }
         )
+
+    private fun applyDelta(delta: (Int) -> Int): Coordinate {
+        return Coordinate(
+            x = if (this.orientation.axis == Axis.X) { delta(this.coordinate.x) } else this.coordinate.x,
+            y = if (this.orientation.axis == Axis.Y) { delta(this.coordinate.y) } else this.coordinate.y
+        )
+    }
 
 }
 
