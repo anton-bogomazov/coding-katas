@@ -15,4 +15,16 @@ class PositionTest {
             sut.forward()
         )
     }
+
+    @Test
+    fun `forward position depends on orientation`() {
+        val sut = position(orientation = Orientation.S)
+        assertEquals(
+            Position(
+                coordinate = Coordinate(0, -1),
+                orientation = Orientation.S
+            ),
+            sut.forward()
+        )
+    }
 }

@@ -7,7 +7,9 @@ data class Position(
 
     fun forward(): Position =
         this.copy(
-            coordinate = this.coordinate.copy(y = this.coordinate.y + 1)
+            coordinate = this.coordinate.copy(
+                y = this.coordinate.y + this.orientation.delta
+            )
         )
 
 }
@@ -17,6 +19,6 @@ data class Coordinate(
     val y: Int,
 )
 
-enum class Orientation {
-    N, S, E, W
+enum class Orientation(val delta: Int) {
+    N(1), S(-1), E(1), W(-1)
 }
