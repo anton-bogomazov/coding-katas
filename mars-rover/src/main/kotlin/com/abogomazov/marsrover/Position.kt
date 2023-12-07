@@ -5,12 +5,12 @@ data class Position(
     val orientation: Orientation,
 ) {
 
-    fun forward(): Position =
+    fun ahead(): Position =
         this.copy(
             coordinate = applyDelta { it + this.orientation.delta }
         )
 
-    fun backward(): Position =
+    fun behind(): Position =
         this.copy(
             coordinate = applyDelta { it - this.orientation.delta }
         )

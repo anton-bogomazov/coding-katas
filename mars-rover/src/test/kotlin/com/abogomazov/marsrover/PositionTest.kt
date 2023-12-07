@@ -12,7 +12,7 @@ class PositionTest {
                 coordinate = Coordinate(0, 1),
                 orientation = Orientation.N
             ),
-            sut.forward()
+            sut.ahead()
         )
     }
 
@@ -24,7 +24,7 @@ class PositionTest {
                 coordinate = Coordinate(0, -1),
                 orientation = Orientation.S
             ),
-            sut.forward()
+            sut.ahead()
         )
     }
 
@@ -36,7 +36,7 @@ class PositionTest {
                 coordinate = Coordinate(-1, 0),
                 orientation = Orientation.W
             ),
-            sut.forward()
+            sut.ahead()
         )
     }
 
@@ -48,7 +48,7 @@ class PositionTest {
                 coordinate = Coordinate(1, 0),
                 orientation = Orientation.W
             ),
-            sut.backward()
+            sut.behind()
         )
     }
 }
