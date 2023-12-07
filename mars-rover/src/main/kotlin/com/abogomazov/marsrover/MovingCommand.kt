@@ -5,11 +5,11 @@ interface MovingCommand {
 }
 object Forward : MovingCommand {
     override fun execute(position: Position): Position {
-        return position
+        return position.ahead()
     }
 }
 object Backward : MovingCommand {
     override fun execute(position: Position): Position {
-        return position
+        return position.behind()
     }
 }
