@@ -40,3 +40,5 @@ aborts the sequence and reports the obstacle.
 - Change roles (driver, navigator) after each TDD cycle.
 - No red phases while refactoring.
 - Be careful about edge cases and exceptions. We can not afford to lose a mars rover, just because the developers overlooked a null pointer.
+
+[Source](https://kata-log.rocks/mars-rover-kata)
