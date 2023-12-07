@@ -10,6 +10,11 @@ data class Position(
             coordinate = applyDelta { it + this.orientation.delta }
         )
 
+    fun backward(): Position =
+        this.copy(
+            coordinate = applyDelta { it - this.orientation.delta }
+        )
+
     private fun applyDelta(delta: (Int) -> Int): Coordinate {
         return Coordinate(
             x = if (this.orientation.axis == Axis.X) { delta(this.coordinate.x) } else this.coordinate.x,
