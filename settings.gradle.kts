@@ -12,3 +12,4 @@ plugins {
 rootProject.name = "coding-katas"
 
 include(":gilded-rose")
+include(":mars-rover")
