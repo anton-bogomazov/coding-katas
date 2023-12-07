@@ -20,4 +20,12 @@ class CommandTest {
             Backward.execute(initialPosition)
         )
     }
+    @Test
+    fun `turn command returns the same position but differently oriented `() {
+        val initialPosition = position()
+        assertEquals(
+            position(orientation = Orientation.W),
+            TurnLeft.execute(initialPosition)
+        )
+    }
 }
