@@ -16,11 +16,20 @@ class MarsRoverTest {
 
     @Test
     fun `execute updates rover position based on command list`() {
-        val sut = MarsRover(position(), freePlanetMap(), OneRecordLog())
+        val sut = MarsRover(position(coordinate = Coordinate(2, 2)), freePlanetMap(), OneRecordLog())
 
-        sut.execute(listOf(MoveForward, MoveForward, TurnLeft, MoveBackward, TurnRight, MoveForward))
+        sut.execute(listOf(
+            MoveBackward, MoveBackward, MoveBackward, MoveBackward,
+            TurnLeft, TurnLeft,
+            MoveForward, MoveBackward,
+            TurnRight, MoveForward, MoveForward, TurnRight,
+            MoveForward, MoveForward, TurnLeft,
+            MoveForward, TurnRight, MoveForward,
+            TurnRight, TurnRight, TurnRight, TurnRight,
+            MoveForward
+        ))
 
-        assertEquals(Coordinate(x = 1, y = 3), sut.coordinate())
+        assertEquals(Coordinate(-1, 2), sut.coordinate())
     }
 
     @Test
