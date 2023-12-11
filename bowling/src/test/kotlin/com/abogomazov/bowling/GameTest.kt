@@ -12,6 +12,12 @@ class GameTest {
     }
 
     @Test
+    fun `total score for non-completed game is calculated correctly`() {
+        val sut = unfinishedGame()
+        assertEquals(44, sut.score())
+    }
+
+    @Test
     fun `total score of 300 can be earned in perfect game`() {
         val sut = perfectGame()
         assertEquals(300, sut.score())
@@ -66,6 +72,22 @@ private fun finishedGame(): Game {
         0, 3,
         3, 0,
         3, 7, 10
+    )
+
+    rolls.forEach {
+        game.roll(it)
+    }
+
+    return game
+}
+
+private fun unfinishedGame(): Game {
+    val game = Game()
+    val rolls = listOf(
+        1, 3,
+        10,
+        7, 3,
+        5,
     )
 
     rolls.forEach {
