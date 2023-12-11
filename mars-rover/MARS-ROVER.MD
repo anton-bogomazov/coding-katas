@@ -13,4 +13,6 @@ So there is a tradeoff here, while command execution logic is cohesive to MarsRo
 I failed to implement 'wrapping at edges' because I didn't understand the task clearly, so I skipped it. 
 Lately, I decided to retain euclidian geometry for simplicity and implement Planet map.
 
+Additionally, I chose to resolve coordinates that exceed the map and keep the original values in the rover. However, overflow remains a potential issue, and it could be worthwhile considering migrating to larger data types.
+
 _Time spent: 3 hours_
