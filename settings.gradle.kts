@@ -13,3 +13,7 @@ rootProject.name = "coding-katas"
 
 include(":gilded-rose")
 include(":mars-rover")
+include(":tell-dont-ask")
+include(":race-car")
+include(":bowling")
+include(":ugly-trivia")
