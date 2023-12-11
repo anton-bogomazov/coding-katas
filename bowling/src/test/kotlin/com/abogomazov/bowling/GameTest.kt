@@ -1,6 +1,7 @@
 package com.abogomazov.bowling
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 class GameTest {
@@ -12,7 +13,23 @@ class GameTest {
     @Test
     fun `add n knocked pins to total score`() {
         val sut = Game()
-        sut.roll(7)
-        assertEquals(7, sut.score())
+        sut.roll(10)
+        assertEquals(10, sut.score())
+    }
+
+    @Test
+    fun `n knocked pins should be positive`() {
+        val sut = Game()
+        assertThrows<IllegalArgumentException> {
+            sut.roll(-1)
+        }
+    }
+
+    @Test
+    fun `n knocked pins cannot exceed 10`() {
+        val sut = Game()
+        assertThrows<IllegalArgumentException> {
+            sut.roll(11)
+        }
     }
 }
