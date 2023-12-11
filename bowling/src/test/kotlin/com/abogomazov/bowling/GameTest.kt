@@ -9,4 +9,10 @@ class GameTest {
         assertEquals(0, Game().score())
     }
 
+    @Test
+    fun `add n knocked pins to total score`() {
+        val sut = Game()
+        sut.roll(7)
+        assertEquals(7, sut.score())
+    }
 }

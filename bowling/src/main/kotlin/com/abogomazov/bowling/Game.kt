@@ -1,6 +1,11 @@
 package com.abogomazov.bowling
 
 class Game {
-    fun roll(nKnockedPins: Int): Unit = TODO()
-    fun score(): Int = 0
+    private var score: Int = 0
+
+    fun roll(nKnockedPins: Int) {
+        score += nKnockedPins
+    }
+
+    fun score(): Int = score
 }
