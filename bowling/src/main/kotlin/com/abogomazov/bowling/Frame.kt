@@ -22,10 +22,12 @@ open class Frame protected constructor() {
 
     fun score() = rolls.sumOf { it.toInt() }
 
+    fun rolls() = rolls.map { it.toInt() }
+
     open fun isCompleted() = rolls.size == MAX_ROLLS || isStrike()
 
-    protected open fun isStrike() = allPinsKnocked() && rolls.size == 1
-    protected fun isSpare() = allPinsKnocked() && rolls.size == MAX_ROLLS
+    open fun isStrike() = allPinsKnocked() && rolls.size == 1
+    fun isSpare() = allPinsKnocked() && rolls.size == MAX_ROLLS
     private fun allPinsKnocked() = score() == TOTAL_PINS
 
     protected open fun pinsLeft() = TOTAL_PINS - rolls.sumOf { it.toInt() }

@@ -20,5 +20,5 @@ class Game {
         }
     }
 
-    fun score(): Int = frames.sumOf { it.score() }
+    fun score(): Int = ScoreCalculator(frames).calculate()
 }

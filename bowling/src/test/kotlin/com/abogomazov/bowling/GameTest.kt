@@ -8,7 +8,13 @@ class GameTest {
     @Test
     fun `total score for finished game is calculated correctly`() {
         val sut = finishedGame()
-        assertEquals(80, sut.score())
+        assertEquals(115, sut.score())
+    }
+
+    @Test
+    fun `total score of 300 can be earned in perfect game`() {
+        val sut = perfectGame()
+        assertEquals(300, sut.score())
     }
 
     @Test
