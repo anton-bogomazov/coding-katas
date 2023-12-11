@@ -24,7 +24,7 @@ open class Frame protected constructor() {
 
     open fun isCompleted() = rolls.size == MAX_ROLLS || isStrike()
 
-    protected fun isStrike() = allPinsKnocked() && rolls.size == 1
+    protected open fun isStrike() = allPinsKnocked() && rolls.size == 1
     protected fun isSpare() = allPinsKnocked() && rolls.size == MAX_ROLLS
     private fun allPinsKnocked() = score() == TOTAL_PINS
 
@@ -47,5 +47,10 @@ open class Frame protected constructor() {
         }
 
         private fun isBonusRollAllowed() = isSpare() || isStrike()
+
+        override fun isStrike(): Boolean {
+            fun isStrikeRoll(n: Int) = rolls.size == n && rolls[n - 1].toInt() == TOTAL_PINS
+            return isStrikeRoll(1) || isStrikeRoll(2) || isStrikeRoll(3)
+        }
     }
 }

@@ -47,8 +47,9 @@ class FrameTest {
     }
 
     @Test
-    fun `third strike cannot be rolled in final frame`() {
+    fun `4th strike cannot be rolled in final frame`() {
         val frame: Frame = Frame.final()
+        frame.roll(Roll(10))
         frame.roll(Roll(10))
         frame.roll(Roll(10))
         assertThrows<IllegalArgumentException> {
