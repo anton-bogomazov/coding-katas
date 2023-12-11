@@ -6,6 +6,19 @@ import kotlin.test.assertEquals
 
 class GameTest {
     @Test
+    fun `total score for finished game is calculated correctly`() {
+        val sut = finishedGame()
+        assertEquals(80, sut.score())
+    }
+
+    @Test
+    fun `cannot roll after the game is finished`() {
+        assertThrows<IllegalArgumentException> {
+            finishedGame().roll(3)
+        }
+    }
+
+    @Test
     fun `game initially has zero scores`() {
         assertEquals(0, Game().score())
     }
@@ -32,4 +45,39 @@ class GameTest {
             sut.roll(11)
         }
     }
+}
+
+private fun finishedGame(): Game {
+    val game = Game()
+    val rolls = listOf(
+        1, 3,
+        10,
+        7, 3,
+        5, 5,
+        10,
+        10,
+        0, 0,
+        0, 3,
+        3, 0,
+        3, 7, 10
+    )
+
+    rolls.forEach {
+        game.roll(it)
+    }
+
+    return game
+}
+
+private fun perfectGame(): Game {
+    val game = Game()
+    val rolls = listOf(
+        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10
+    )
+
+    rolls.forEach {
+        game.roll(it)
+    }
+
+    return game
 }
