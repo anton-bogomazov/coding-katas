@@ -30,30 +30,23 @@ class Game(
         println("They have rolled a $roll")
 
         if (currentPlayer.inPenaltyBox) {
-            if (roll % 2 != 0) {
-                isGettingOutOfPenaltyBox = true
-
-                println("${currentPlayer.name} is getting out of the penalty box")
-                currentPlayer.place += roll
-                if (currentPlayer.place > 11) currentPlayer.place -= 12
-
-                println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
-                println("The category is " + currentCategory())
-                askQuestion()
-            } else {
+            if (roll % 2 == 0) {
                 println("${currentPlayer.name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
+                return
             }
-
-        } else {
-            currentPlayer.place += roll
-            if (currentPlayer.place > 11) currentPlayer.place -= 12
-
-            println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
-            println("The category is ${currentCategory()}")
-            askQuestion()
+            isGettingOutOfPenaltyBox = true
+            println("${currentPlayer.name} is getting out of the penalty box")
         }
+        calculatePlace(roll)
+        println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
+        println("The category is ${currentCategory()}")
+        askQuestion()
+    }
 
+    private fun calculatePlace(roll: Int) {
+        currentPlayer.place += roll
+        if (currentPlayer.place > 11) currentPlayer.place -= 12
     }
 
     private fun askQuestion() {
