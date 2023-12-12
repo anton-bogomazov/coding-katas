@@ -3,18 +3,18 @@ package com.abogomazov.uglytrivia
 import java.util.*
 
 class Game {
-    internal var players = ArrayList<Any>()
-    internal var places = IntArray(6)
-    internal var purses = IntArray(6)
-    internal var inPenaltyBox = BooleanArray(6)
+    private val players = ArrayList<Any>()
+    private val places = IntArray(6)
+    private val purses = IntArray(6)
+    private val inPenaltyBox = BooleanArray(6)
 
-    internal var popQuestions = LinkedList<Any>()
-    internal var scienceQuestions = LinkedList<Any>()
-    internal var sportsQuestions = LinkedList<Any>()
-    internal var rockQuestions = LinkedList<Any>()
+    private val popQuestions = LinkedList<Any>()
+    private val scienceQuestions = LinkedList<Any>()
+    private val sportsQuestions = LinkedList<Any>()
+    private val rockQuestions = LinkedList<Any>()
 
-    internal var currentPlayer = 0
-    internal var isGettingOutOfPenaltyBox: Boolean = false
+    private var currentPlayer = 0
+    private var isGettingOutOfPenaltyBox: Boolean = false
 
     init {
         for (i in 0..49) {
