@@ -5,9 +5,9 @@ class Game(
     private val winScore: Int = 6
 ) {
     private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
+    private val categories = listOf("Pop", "Science", "Sports", "Rock")
     private val questions =
-        listOf("Pop", "Science", "Sports", "Rock")
-            .flatMap { category ->
+        categories.flatMap { category ->
                 (0..49).map { i ->
                     val title = "$category Question $i"
                     Question(category, title)
@@ -64,16 +64,7 @@ class Game(
     }
 
     private fun currentCategory(): String {
-        if (currentPlayer.place == 0) return "Pop"
-        if (currentPlayer.place == 4) return "Pop"
-        if (currentPlayer.place == 8) return "Pop"
-        if (currentPlayer.place == 1) return "Science"
-        if (currentPlayer.place == 5) return "Science"
-        if (currentPlayer.place == 9) return "Science"
-        if (currentPlayer.place == 2) return "Sports"
-        if (currentPlayer.place == 6) return "Sports"
-        if (currentPlayer.place == 10) return "Sports"
-        return "Rock"
+        return categories[currentPlayer.place % 4]
     }
 
     fun wasCorrectlyAnswered(): Boolean {
