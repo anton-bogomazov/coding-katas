@@ -10,10 +10,14 @@ class Game(
     private val purses = IntArray(players.size)
     private val inPenaltyBox = BooleanArray(players.size)
 
-    private val popQuestions: MutableList<Question>
-    private val scienceQuestions: MutableList<Question>
-    private val sportsQuestions: MutableList<Question>
-    private val rockQuestions: MutableList<Question>
+    private val questions =
+        listOf("Pop", "Science", "Sports", "Rock")
+            .flatMap { category ->
+                (0..49).map { i ->
+                    val title = "$category Question $i"
+                    Question(category, title)
+                }
+            }.toMutableList()
 
     private var currentPlayer = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
@@ -25,19 +29,6 @@ class Game(
             println(it + " was added")
             println("They are player number " + (i + 1))
         }
-
-        val categories = listOf("Pop", "Science", "Sports", "Rock")
-
-        val questions = categories.flatMap { category ->
-            (0..49).map { i ->
-                val title = "$category Question $i"
-                Question(category, title)
-            }
-        }
-        popQuestions = questions.filter { it.category == "Pop" }.toMutableList()
-        scienceQuestions = questions.filter { it.category == "Science" }.toMutableList()
-        sportsQuestions = questions.filter { it.category == "Sports" }.toMutableList()
-        rockQuestions = questions.filter { it.category == "Rock" }.toMutableList()
     }
 
     fun roll(roll: Int) {
@@ -77,14 +68,10 @@ class Game(
     }
 
     private fun askQuestion() {
-        if (currentCategory() === "Pop")
-            println(popQuestions.removeFirst())
-        if (currentCategory() === "Science")
-            println(scienceQuestions.removeFirst())
-        if (currentCategory() === "Sports")
-            println(sportsQuestions.removeFirst())
-        if (currentCategory() === "Rock")
-            println(rockQuestions.removeFirst())
+        val question = questions.find { it.category == currentCategory() }
+            ?: error("no question of category ${currentCategory()}")
+        questions.remove(question)
+        println(question)
     }
 
     private fun currentCategory(): String {
