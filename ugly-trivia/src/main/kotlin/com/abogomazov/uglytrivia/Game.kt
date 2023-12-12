@@ -24,7 +24,6 @@ class Game(
 
     init {
         require(players.size > 1) { "Min number of players is 2" }
-
         players.forEachIndexed { i, it ->
             println(it + " was added")
             println("They are player number " + (i + 1))
@@ -88,47 +87,34 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox) {
-                println("Answer was correct!!!!")
-                purses[currentPlayer]++
-                println(players[currentPlayer].toString()
-                        + " now has "
-                        + purses[currentPlayer]
-                        + " Gold Coins.")
-
-                val winner = didPlayerWin()
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
-
-                return winner
-            } else {
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
-                return true
-            }
-
-
-        } else {
-
+        if (!inPenaltyBox[currentPlayer]) {
             println("Answer was corrent!!!!")
             purses[currentPlayer]++
-            println(players[currentPlayer].toString()
-                    + " now has "
-                    + purses[currentPlayer]
-                    + " Gold Coins.")
-
+            println(players[currentPlayer] + " now has " + purses[currentPlayer] + " Gold Coins.")
+            val winner = didPlayerWin()
+            currentPlayer++
+            if (currentPlayer == players.size) {
+                currentPlayer = 0
+            }
+            return winner
+        }
+        if (isGettingOutOfPenaltyBox) {
+            println("Answer was correct!!!!")
+            purses[currentPlayer]++
+            println(players[currentPlayer] + " now has " + purses[currentPlayer] + " Gold Coins.")
             val winner = didPlayerWin()
             currentPlayer++
             if (currentPlayer == players.size) currentPlayer = 0
-
             return winner
         }
+        currentPlayer++
+        if (currentPlayer == players.size) currentPlayer = 0
+        return true
     }
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println(players[currentPlayer].toString() + " was sent to the penalty box")
+        println(players[currentPlayer] + " was sent to the penalty box")
         inPenaltyBox[currentPlayer] = true
 
         currentPlayer++
