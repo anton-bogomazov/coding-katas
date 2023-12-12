@@ -24,4 +24,4 @@ class GameTest {
     }
 }
 
-private fun emptyQuestionSet() = QuestionSet(emptyList(), mutableListOf())
+private fun emptyQuestionSet() = QuestionSet(emptyList())

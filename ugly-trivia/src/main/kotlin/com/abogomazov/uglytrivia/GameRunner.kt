@@ -6,37 +6,35 @@ fun main(args: Array<String>) {
 
 object GameRunner {
     fun run() {
-        val categories = listOf("Pop", "Science", "Sports", "Rock")
-        val aGame = Game(
+        val game = Game(
             listOf("Chet", "Pat", "Sue"),
             QuestionSet(
-                categories,
-                categories.flatMap { category ->
-                    (0..49).map { i ->
-                        val title = "$category Question $i"
-                        Question(category, title)
-                    }
-                }.toMutableList()
+                listOf(
+                    Questions("Pop", (0..49).map { Question("Pop Question $it", "correct") }.toMutableList()),
+                    Questions("Science", (0..49).map { Question("Science Question $it", "correct") }.toMutableList()),
+                    Questions("Sports", (0..49).map { Question("Sports Question $it", "correct") }.toMutableList()),
+                    Questions("Rock", (0..49).map { Question("Rock Question $it", "correct") }.toMutableList()),
+                )
             )
         )
 
-        val rand = Sequence
-
-        do {
-            aGame.roll(rand.nextInt(5) + 1)
-            if (rand.nextInt(9) == 7) {
-                aGame.wrongAnswer()
+        while (!game.finished()) {
+            val question = game.roll(Sequence.next(5) + 1)
+            val answer = if (Sequence.next(9) == 7) "wrong" else "correct"
+            question ?: continue
+            if (question.checkAnswer(answer)) {
+                game.wasCorrectlyAnswered()
             } else {
-                aGame.wasCorrectlyAnswered()
+                game.wrongAnswer()
             }
-        } while (!aGame.finished())
+        }
     }
 }
 
 object Sequence {
     private val sequence = List(100) { it }.iterator()
 
-    fun nextInt(until: Int): Int {
+    fun next(until: Int): Int {
         return sequence.next() % until
     }
 }

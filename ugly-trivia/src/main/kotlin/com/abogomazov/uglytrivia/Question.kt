@@ -1,8 +1,9 @@
 package com.abogomazov.uglytrivia
 
 data class Question(
-    val category: String,
     val text: String,
+    val answer: String,
 ) {
+    fun checkAnswer(userAnswer: String) = userAnswer == answer
     override fun toString() = text
 }

@@ -5,21 +5,20 @@ class Game(
     private val questions: QuestionSet,
     private val winScore: Int = 6,
 ) {
-    private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
-
-    private var currentPlayer = players.first()
-
-    private var finished: Boolean = false
-
     init {
-        require(players.size > 1) { "Min number of players is 2" }
+        require(playerNames.size > 1) { "Min number of players is 2" }
         playerNames.forEachIndexed { i, it ->
             println("$it was added")
             println("They are player number " + (i + 1))
         }
     }
+    private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
 
-    fun roll(roll: Int) {
+    private var finished: Boolean = false
+
+    private var currentPlayer = players.first()
+
+    fun roll(roll: Int): Question? {
         println("${currentPlayer.name} is the current player")
         println("They have rolled a $roll")
 
@@ -29,12 +28,15 @@ class Game(
                 println("${currentPlayer.name} is getting out of the penalty box")
             } else {
                 println("${currentPlayer.name} is not getting out of the penalty box")
-                return
+                passTurn()
+                return null
             }
         }
         currentPlayer.calculatePlace(roll)
         println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
-        println(questions.next(currentPlayer.place))
+        val question = questions.next(currentPlayer.place)
+        println(question)
+        return question
     }
 
     fun wasCorrectlyAnswered() {
