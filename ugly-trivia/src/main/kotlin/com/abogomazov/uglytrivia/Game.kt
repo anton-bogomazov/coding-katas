@@ -9,10 +9,10 @@ class Game(
     private val purses = IntArray(players.size)
     private val inPenaltyBox = BooleanArray(players.size)
 
-    private val popQuestions = LinkedList<Any>()
-    private val scienceQuestions = LinkedList<Any>()
-    private val sportsQuestions = LinkedList<Any>()
-    private val rockQuestions = LinkedList<Any>()
+    private val popQuestions: MutableList<Question>
+    private val scienceQuestions: MutableList<Question>
+    private val sportsQuestions: MutableList<Question>
+    private val rockQuestions: MutableList<Question>
 
     private var currentPlayer = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
@@ -25,12 +25,18 @@ class Game(
             println("They are player number " + (i + 1))
         }
 
-        for (i in 0..49) {
-            popQuestions.addLast("Pop Question " + i)
-            scienceQuestions.addLast("Science Question " + i)
-            sportsQuestions.addLast("Sports Question " + i)
-            rockQuestions.addLast("Rock Question " + i)
+        val categories = listOf("Pop", "Science", "Sports", "Rock")
+
+        val questions = categories.flatMap { category ->
+            (0..49).map { i ->
+                val title = "$category Question $i"
+                Question(category, title)
+            }
         }
+        popQuestions = questions.filter { it.category == "Pop" }.toMutableList()
+        scienceQuestions = questions.filter { it.category == "Science" }.toMutableList()
+        sportsQuestions = questions.filter { it.category == "Sports" }.toMutableList()
+        rockQuestions = questions.filter { it.category == "Rock" }.toMutableList()
     }
 
     fun roll(roll: Int) {
