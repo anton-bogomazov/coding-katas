@@ -77,16 +77,16 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (!currentPlayer.inPenaltyBox || isGettingOutOfPenaltyBox) {
-            println("Answer was correct!!!!")
-            currentPlayer.score += 1
-            println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
-            val winner = currentPlayer.hasWon(winScore)
+        if (currentPlayer.inPenaltyBox && !isGettingOutOfPenaltyBox) {
             passTurn()
-            return winner
+            return true
         }
+        println("Answer was correct!!!!")
+        currentPlayer.score += 1
+        println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
+        val winner = currentPlayer.hasWon(winScore)
         passTurn()
-        return true
+        return winner
     }
 
     fun wrongAnswer(): Boolean {
