@@ -8,11 +8,7 @@ object GameRunner {
     var notAWinner: Boolean = false
 
     fun run() {
-        val aGame = Game()
-
-        aGame.add("Chet")
-        aGame.add("Pat")
-        aGame.add("Sue")
+        val aGame = Game(listOf("Chet", "Pat", "Sue"))
 
         val rand = Sequence
 

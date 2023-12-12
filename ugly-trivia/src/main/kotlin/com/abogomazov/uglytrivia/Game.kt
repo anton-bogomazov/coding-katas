@@ -3,12 +3,11 @@ package com.abogomazov.uglytrivia
 import java.util.*
 
 class Game(
-    private val maxPlayers: Int = 6
+    private val players: List<String>
 ) {
-    private val players = ArrayList<Any>()
-    private val places = IntArray(maxPlayers)
-    private val purses = IntArray(maxPlayers)
-    private val inPenaltyBox = BooleanArray(maxPlayers)
+    private val places = IntArray(players.size)
+    private val purses = IntArray(players.size)
+    private val inPenaltyBox = BooleanArray(players.size)
 
     private val popQuestions = LinkedList<Any>()
     private val scienceQuestions = LinkedList<Any>()
@@ -19,6 +18,11 @@ class Game(
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     init {
+        players.forEachIndexed { i, it ->
+            println(it + " was added")
+            println("They are player number " + (i + 1))
+        }
+
         for (i in 0..49) {
             popQuestions.addLast("Pop Question " + i)
             scienceQuestions.addLast("Science Question " + i)
@@ -32,24 +36,7 @@ class Game(
     }
 
     fun isPlayable(): Boolean {
-        return howManyPlayers() >= 2
-    }
-
-    fun add(playerName: String): Boolean {
-
-
-        players.add(playerName)
-        places[howManyPlayers()] = 0
-        purses[howManyPlayers()] = 0
-        inPenaltyBox[howManyPlayers()] = false
-
-        println(playerName + " was added")
-        println("They are player number " + players.size)
-        return true
-    }
-
-    fun howManyPlayers(): Int {
-        return players.size
+        return players.size >= 2
     }
 
     fun roll(roll: Int) {
