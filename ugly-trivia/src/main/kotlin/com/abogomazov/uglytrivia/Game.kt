@@ -81,7 +81,7 @@ class Game(
             println("Answer was correct!!!!")
             currentPlayer.score += 1
             println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
-            val winner = didPlayerWin()
+            val winner = currentPlayer.hasWon(winScore)
             passTurn()
             return winner
         }
@@ -96,10 +96,6 @@ class Game(
 
         passTurn()
         return true
-    }
-
-    private fun didPlayerWin(): Boolean {
-        return currentPlayer.score < winScore
     }
 
     private fun passTurn() {
