@@ -6,20 +6,22 @@ import org.junit.jupiter.api.assertThrows
 class GameTest {
     @Test
     fun `2 or more players can play the game`() {
-        Game(listOf("Ben", "Ten"))
+        Game(listOf("Ben", "Ten"), emptyQuestionSet())
     }
 
     @Test
     fun `cannot create a game for 1 player`() {
         assertThrows<IllegalArgumentException> {
-            Game(listOf("Joe"))
+            Game(listOf("Joe"), emptyQuestionSet())
         }
     }
 
     @Test
     fun `cannot create a game without players`() {
         assertThrows<IllegalArgumentException> {
-            Game(emptyList())
+            Game(emptyList(), emptyQuestionSet())
         }
     }
 }
+
+private fun emptyQuestionSet() = QuestionSet(emptyList(), mutableListOf())

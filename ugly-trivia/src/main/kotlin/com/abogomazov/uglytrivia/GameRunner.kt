@@ -8,7 +8,19 @@ object GameRunner {
     var notAWinner: Boolean = false
 
     fun run() {
-        val aGame = Game(listOf("Chet", "Pat", "Sue"))
+        val categories = listOf("Pop", "Science", "Sports", "Rock")
+        val aGame = Game(
+            listOf("Chet", "Pat", "Sue"),
+            QuestionSet(
+                categories,
+                categories.flatMap { category ->
+                    (0..49).map { i ->
+                        val title = "$category Question $i"
+                        Question(category, title)
+                    }
+                }.toMutableList()
+            )
+        )
 
         val rand = Sequence
 

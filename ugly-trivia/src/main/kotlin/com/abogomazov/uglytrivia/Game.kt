@@ -2,17 +2,10 @@ package com.abogomazov.uglytrivia
 
 class Game(
     playerNames: List<String>,
-    private val winScore: Int = 6
+    private val questions: QuestionSet,
+    private val winScore: Int = 6,
 ) {
     private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
-    private val categories = listOf("Pop", "Science", "Sports", "Rock")
-    private val questions =
-        categories.flatMap { category ->
-                (0..49).map { i ->
-                    val title = "$category Question $i"
-                    Question(category, title)
-                }
-            }.toMutableList()
 
     private var currentPlayer = players.first()
 
@@ -39,19 +32,7 @@ class Game(
         }
         currentPlayer.calculatePlace(roll)
         println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
-        println("The category is ${currentCategory()}")
-        askQuestion()
-    }
-
-    private fun askQuestion() {
-        val question = questions.find { it.category == currentCategory() }
-            ?: error("no question of category ${currentCategory()}")
-        questions.remove(question)
-        println(question)
-    }
-
-    private fun currentCategory(): String {
-        return categories[currentPlayer.place % 4]
+        println(questions.next(currentPlayer.place))
     }
 
     fun wasCorrectlyAnswered(): Boolean {
