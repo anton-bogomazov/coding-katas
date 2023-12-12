@@ -1,4 +1,4 @@
-package com.abogomazov.uglytrivia
+package com.abogomazov.uglytrivia.domain
 
 data class Question(
     val text: String,

@@ -1,5 +1,9 @@
 package com.abogomazov.uglytrivia
 
+import com.abogomazov.uglytrivia.domain.Question
+import com.abogomazov.uglytrivia.domain.QuestionSet
+import com.abogomazov.uglytrivia.domain.Questions
+
 fun main(args: Array<String>) {
     GameRunner.run()
 }

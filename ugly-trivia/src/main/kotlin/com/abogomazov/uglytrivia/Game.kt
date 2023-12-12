@@ -1,5 +1,9 @@
 package com.abogomazov.uglytrivia
 
+import com.abogomazov.uglytrivia.domain.Player
+import com.abogomazov.uglytrivia.domain.Question
+import com.abogomazov.uglytrivia.domain.QuestionSet
+
 class Game(
     playerNames: List<String>,
     private val questions: QuestionSet,

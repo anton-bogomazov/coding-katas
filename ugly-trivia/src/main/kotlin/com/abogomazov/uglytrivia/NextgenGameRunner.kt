@@ -1,5 +1,9 @@
 package com.abogomazov.uglytrivia
 
+import com.abogomazov.uglytrivia.domain.Question
+import com.abogomazov.uglytrivia.domain.QuestionSet
+import com.abogomazov.uglytrivia.domain.Questions
+
 class NextgenGameRunner {
     private val players = listOf("John", "Roger", "Marie", "Tim")
     private val scienceQuestions = listOf(

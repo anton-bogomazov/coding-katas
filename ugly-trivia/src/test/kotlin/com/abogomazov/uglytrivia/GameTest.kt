@@ -1,5 +1,6 @@
 package com.abogomazov.uglytrivia
 
+import com.abogomazov.uglytrivia.domain.QuestionSet
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
