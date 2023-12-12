@@ -27,6 +27,7 @@ class Game(
         if (currentPlayer.inPenaltyBox()) {
             if (roll % 2 != 0) {
                 println("${currentPlayer.name} is getting out of the penalty box")
+                // TODO bug, player should be taken out of penalty box
             } else {
                 println("${currentPlayer.name} is not getting out of the penalty box")
                 passTurn()
