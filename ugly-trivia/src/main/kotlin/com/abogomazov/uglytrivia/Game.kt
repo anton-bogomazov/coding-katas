@@ -77,7 +77,7 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (!getCurrentPlayer().inPenaltyBox) {
+        if (!getCurrentPlayer().inPenaltyBox || isGettingOutOfPenaltyBox) {
             println("Answer was correct!!!!")
             getCurrentPlayer().score += 1
             println("${getCurrentPlayer().name} now has ${getCurrentPlayer().score} Gold Coins.")
@@ -86,15 +86,6 @@ class Game(
             if (currentPlayerId == playerNames.size) {
                 currentPlayerId = 0
             }
-            return winner
-        }
-        if (isGettingOutOfPenaltyBox) {
-            println("Answer was correct!!!!")
-            getCurrentPlayer().score += 1
-            println("${getCurrentPlayer().name} now has ${getCurrentPlayer().score} Gold Coins.")
-            val winner = didPlayerWin()
-            currentPlayerId++
-            if (currentPlayerId == playerNames.size) currentPlayerId = 0
             return winner
         }
         currentPlayerId++
