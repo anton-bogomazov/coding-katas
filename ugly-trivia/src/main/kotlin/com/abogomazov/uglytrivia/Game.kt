@@ -1,7 +1,7 @@
 package com.abogomazov.uglytrivia
 
 class Game(
-    private val playerNames: List<String>,
+    playerNames: List<String>,
     private val winScore: Int = 6
 ) {
     private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
@@ -14,7 +14,7 @@ class Game(
                 }
             }.toMutableList()
 
-    private var currentPlayerId = 0
+    private var currentPlayer = players.first()
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     init {
@@ -26,30 +26,30 @@ class Game(
     }
 
     fun roll(roll: Int) {
-        println("${getCurrentPlayer().name} is the current player")
+        println("${currentPlayer.name} is the current player")
         println("They have rolled a $roll")
 
-        if (getCurrentPlayer().inPenaltyBox) {
+        if (currentPlayer.inPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
-                println("${getCurrentPlayer().name} is getting out of the penalty box")
-                getCurrentPlayer().place += roll
-                if (getCurrentPlayer().place > 11) getCurrentPlayer().place -= 12
+                println("${currentPlayer.name} is getting out of the penalty box")
+                currentPlayer.place += roll
+                if (currentPlayer.place > 11) currentPlayer.place -= 12
 
-                println("${getCurrentPlayer().name}'s new location is ${getCurrentPlayer().place}")
+                println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
                 println("The category is " + currentCategory())
                 askQuestion()
             } else {
-                println("${getCurrentPlayer().name} is not getting out of the penalty box")
+                println("${currentPlayer.name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
 
         } else {
-            getCurrentPlayer().place += roll
-            if (getCurrentPlayer().place > 11) getCurrentPlayer().place -= 12
+            currentPlayer.place += roll
+            if (currentPlayer.place > 11) currentPlayer.place -= 12
 
-            println("${getCurrentPlayer().name}'s new location is ${getCurrentPlayer().place}")
+            println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
             println("The category is ${currentCategory()}")
             askQuestion()
         }
@@ -64,48 +64,49 @@ class Game(
     }
 
     private fun currentCategory(): String {
-        if (getCurrentPlayer().place == 0) return "Pop"
-        if (getCurrentPlayer().place == 4) return "Pop"
-        if (getCurrentPlayer().place == 8) return "Pop"
-        if (getCurrentPlayer().place == 1) return "Science"
-        if (getCurrentPlayer().place == 5) return "Science"
-        if (getCurrentPlayer().place == 9) return "Science"
-        if (getCurrentPlayer().place == 2) return "Sports"
-        if (getCurrentPlayer().place == 6) return "Sports"
-        if (getCurrentPlayer().place == 10) return "Sports"
+        if (currentPlayer.place == 0) return "Pop"
+        if (currentPlayer.place == 4) return "Pop"
+        if (currentPlayer.place == 8) return "Pop"
+        if (currentPlayer.place == 1) return "Science"
+        if (currentPlayer.place == 5) return "Science"
+        if (currentPlayer.place == 9) return "Science"
+        if (currentPlayer.place == 2) return "Sports"
+        if (currentPlayer.place == 6) return "Sports"
+        if (currentPlayer.place == 10) return "Sports"
         return "Rock"
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (!getCurrentPlayer().inPenaltyBox || isGettingOutOfPenaltyBox) {
+        if (!currentPlayer.inPenaltyBox || isGettingOutOfPenaltyBox) {
             println("Answer was correct!!!!")
-            getCurrentPlayer().score += 1
-            println("${getCurrentPlayer().name} now has ${getCurrentPlayer().score} Gold Coins.")
+            currentPlayer.score += 1
+            println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
             val winner = didPlayerWin()
-            currentPlayerId++
-            if (currentPlayerId == playerNames.size) {
-                currentPlayerId = 0
-            }
+            passTurn()
             return winner
         }
-        currentPlayerId++
-        if (currentPlayerId == playerNames.size) currentPlayerId = 0
+        passTurn()
         return true
     }
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println("${getCurrentPlayer().name} was sent to the penalty box")
-        getCurrentPlayer().inPenaltyBox = true
+        println("${currentPlayer.name} was sent to the penalty box")
+        currentPlayer.inPenaltyBox = true
 
-        currentPlayerId++
-        if (currentPlayerId == playerNames.size) currentPlayerId = 0
+        passTurn()
         return true
     }
 
     private fun didPlayerWin(): Boolean {
-        return getCurrentPlayer().score < winScore
+        return currentPlayer.score < winScore
     }
 
-    private fun getCurrentPlayer() = players.find { it.id == currentPlayerId }!!
+    private fun passTurn() {
+        if (currentPlayer.id == players.lastIndex) {
+            currentPlayer = players[0]
+        } else {
+            currentPlayer = players[currentPlayer.id + 1]
+        }
+    }
 }
