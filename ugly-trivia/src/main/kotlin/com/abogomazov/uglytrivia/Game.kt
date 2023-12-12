@@ -18,6 +18,8 @@ class Game(
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     init {
+        require(players.size > 1) { "Min number of players is 2" }
+
         players.forEachIndexed { i, it ->
             println(it + " was added")
             println("They are player number " + (i + 1))
@@ -33,10 +35,6 @@ class Game(
 
     fun createRockQuestion(index: Int): String {
         return "Rock Question " + index
-    }
-
-    fun isPlayable(): Boolean {
-        return players.size >= 2
     }
 
     fun roll(roll: Int) {
