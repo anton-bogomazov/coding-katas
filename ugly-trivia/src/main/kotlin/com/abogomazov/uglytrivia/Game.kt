@@ -17,16 +17,14 @@ class Game(
         }
     }
     private val players = playerNames.mapIndexed { i, name -> Player(id = i, name = name) }
-
     private var finished: Boolean = false
-
     private var currentPlayer = players.first()
 
     fun roll(roll: Int): Question? {
         println("${currentPlayer.name} is the current player")
         println("They have rolled a $roll")
 
-        if (currentPlayer.inPenaltyBox) {
+        if (currentPlayer.inPenaltyBox()) {
             if (roll % 2 != 0) {
                 println("${currentPlayer.name} is getting out of the penalty box")
             } else {
@@ -35,17 +33,17 @@ class Game(
                 return null
             }
         }
-        currentPlayer.calculatePlace(roll)
-        println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
-        val question = questions.next(currentPlayer.place)
+        currentPlayer.moveForwardOn(roll)
+        println("${currentPlayer.name}'s new location is ${currentPlayer.place()}")
+        val question = questions.next(currentPlayer.place())
         println(question)
         return question
     }
 
     fun wasCorrectlyAnswered() {
         println("Answer was correct!!!!")
-        currentPlayer.score += 1
-        println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
+        currentPlayer.addScore()
+        println("${currentPlayer.name} now has ${currentPlayer.score()} Gold Coins.")
         finished = currentPlayer.hasWon(winScore)
         passTurn()
     }
@@ -53,7 +51,7 @@ class Game(
     fun wrongAnswer() {
         println("Question was incorrectly answered")
         println("${currentPlayer.name} was sent to the penalty box")
-        currentPlayer.inPenaltyBox = true
+        currentPlayer.putInPenaltyBox()
         passTurn()
     }
 
