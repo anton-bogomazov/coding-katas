@@ -15,7 +15,6 @@ class Game(
             }.toMutableList()
 
     private var currentPlayer = players.first()
-    private var isGettingOutOfPenaltyBox: Boolean = false
 
     init {
         require(players.size > 1) { "Min number of players is 2" }
@@ -32,10 +31,10 @@ class Game(
         if (currentPlayer.inPenaltyBox) {
             if (roll % 2 == 0) {
                 println("${currentPlayer.name} is not getting out of the penalty box")
-                isGettingOutOfPenaltyBox = false
+                currentPlayer.isGettingOutOfPenaltyBox = false
                 return
             }
-            isGettingOutOfPenaltyBox = true
+            currentPlayer.isGettingOutOfPenaltyBox = true
             println("${currentPlayer.name} is getting out of the penalty box")
         }
         calculatePlace(roll)
@@ -61,7 +60,7 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (currentPlayer.inPenaltyBox && !isGettingOutOfPenaltyBox) {
+        if (currentPlayer.inPenaltyBox && !currentPlayer.isGettingOutOfPenaltyBox) {
             passTurn()
             return true
         }
