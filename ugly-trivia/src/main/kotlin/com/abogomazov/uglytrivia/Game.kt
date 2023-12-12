@@ -29,23 +29,18 @@ class Game(
         println("They have rolled a $roll")
 
         if (currentPlayer.inPenaltyBox) {
-            if (roll % 2 == 0) {
+            currentPlayer.tryToGetOutFromPenaltyBox(roll)
+            if (currentPlayer.isGettingOutOfPenaltyBox) {
+                println("${currentPlayer.name} is getting out of the penalty box")
+            } else {
                 println("${currentPlayer.name} is not getting out of the penalty box")
-                currentPlayer.isGettingOutOfPenaltyBox = false
                 return
             }
-            currentPlayer.isGettingOutOfPenaltyBox = true
-            println("${currentPlayer.name} is getting out of the penalty box")
         }
-        calculatePlace(roll)
+        currentPlayer.calculatePlace(roll)
         println("${currentPlayer.name}'s new location is ${currentPlayer.place}")
         println("The category is ${currentCategory()}")
         askQuestion()
-    }
-
-    private fun calculatePlace(roll: Int) {
-        currentPlayer.place += roll
-        if (currentPlayer.place > 11) currentPlayer.place -= 12
     }
 
     private fun askQuestion() {
@@ -60,7 +55,7 @@ class Game(
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (currentPlayer.inPenaltyBox && !currentPlayer.isGettingOutOfPenaltyBox) {
+        if (currentPlayer.isPenalty()) {
             passTurn()
             return true
         }
@@ -76,7 +71,6 @@ class Game(
         println("Question was incorrectly answered")
         println("${currentPlayer.name} was sent to the penalty box")
         currentPlayer.inPenaltyBox = true
-
         passTurn()
         return true
     }
