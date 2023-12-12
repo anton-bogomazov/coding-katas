@@ -3,7 +3,8 @@ package com.abogomazov.uglytrivia
 import java.util.*
 
 class Game(
-    private val players: List<String>
+    private val players: List<String>,
+    private val winScore: Int = 6
 ) {
     private val places = IntArray(players.size)
     private val purses = IntArray(players.size)
@@ -149,6 +150,6 @@ class Game(
     }
 
     private fun didPlayerWin(): Boolean {
-        return purses[currentPlayer] != 6
+        return purses[currentPlayer] < winScore
     }
 }
