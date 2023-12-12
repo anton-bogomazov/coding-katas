@@ -27,8 +27,7 @@ class Game(
         println("They have rolled a $roll")
 
         if (currentPlayer.inPenaltyBox) {
-            currentPlayer.tryToGetOutFromPenaltyBox(roll)
-            if (currentPlayer.isGettingOutOfPenaltyBox) {
+            if (roll % 2 != 0) {
                 println("${currentPlayer.name} is getting out of the penalty box")
             } else {
                 println("${currentPlayer.name} is not getting out of the penalty box")
@@ -44,10 +43,6 @@ class Game(
     }
 
     fun wasCorrectlyAnswered() {
-        if (currentPlayer.isPenalty()) {
-            passTurn()
-            return
-        }
         println("Answer was correct!!!!")
         currentPlayer.score += 1
         println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
