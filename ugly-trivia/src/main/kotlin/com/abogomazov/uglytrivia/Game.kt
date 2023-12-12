@@ -9,6 +9,8 @@ class Game(
 
     private var currentPlayer = players.first()
 
+    private var finished: Boolean = false
+
     init {
         require(players.size > 1) { "Min number of players is 2" }
         playerNames.forEachIndexed { i, it ->
@@ -35,25 +37,23 @@ class Game(
         println(questions.next(currentPlayer.place))
     }
 
-    fun wasCorrectlyAnswered(): Boolean {
+    fun wasCorrectlyAnswered() {
         if (currentPlayer.isPenalty()) {
             passTurn()
-            return true
+            return
         }
         println("Answer was correct!!!!")
         currentPlayer.score += 1
         println("${currentPlayer.name} now has ${currentPlayer.score} Gold Coins.")
-        val winner = currentPlayer.hasWon(winScore)
+        finished = currentPlayer.hasWon(winScore)
         passTurn()
-        return winner
     }
 
-    fun wrongAnswer(): Boolean {
+    fun wrongAnswer() {
         println("Question was incorrectly answered")
         println("${currentPlayer.name} was sent to the penalty box")
         currentPlayer.inPenaltyBox = true
         passTurn()
-        return true
     }
 
     private fun passTurn() {
@@ -63,4 +63,6 @@ class Game(
             currentPlayer = players[currentPlayer.id + 1]
         }
     }
+
+    fun finished() = finished
 }

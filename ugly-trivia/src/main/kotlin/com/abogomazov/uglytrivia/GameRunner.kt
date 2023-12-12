@@ -5,8 +5,6 @@ fun main(args: Array<String>) {
 }
 
 object GameRunner {
-    var notAWinner: Boolean = false
-
     fun run() {
         val categories = listOf("Pop", "Science", "Sports", "Rock")
         val aGame = Game(
@@ -25,18 +23,13 @@ object GameRunner {
         val rand = Sequence
 
         do {
-
             aGame.roll(rand.nextInt(5) + 1)
-
             if (rand.nextInt(9) == 7) {
-                GameRunner.notAWinner = aGame.wrongAnswer()
+                aGame.wrongAnswer()
             } else {
-                GameRunner.notAWinner = aGame.wasCorrectlyAnswered()
+                aGame.wasCorrectlyAnswered()
             }
-
-
-        } while (GameRunner.notAWinner)
-
+        } while (!aGame.finished())
     }
 }
 

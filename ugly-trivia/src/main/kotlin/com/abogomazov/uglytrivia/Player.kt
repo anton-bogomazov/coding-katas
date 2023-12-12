@@ -8,7 +8,7 @@ data class Player(
     var place: Int = 0,
     var score: Int = 0,
 ) {
-    fun hasWon(targetScore: Int) = score < targetScore
+    fun hasWon(targetScore: Int) = score >= targetScore
 
     fun isPenalty() = inPenaltyBox && !isGettingOutOfPenaltyBox
 
