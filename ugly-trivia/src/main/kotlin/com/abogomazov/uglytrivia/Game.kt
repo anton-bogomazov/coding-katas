@@ -78,7 +78,7 @@ class Game(
 
     fun wasCorrectlyAnswered(): Boolean {
         if (!getCurrentPlayer().inPenaltyBox) {
-            println("Answer was corrent!!!!")
+            println("Answer was correct!!!!")
             getCurrentPlayer().score += 1
             println("${getCurrentPlayer().name} now has ${getCurrentPlayer().score} Gold Coins.")
             val winner = didPlayerWin()
