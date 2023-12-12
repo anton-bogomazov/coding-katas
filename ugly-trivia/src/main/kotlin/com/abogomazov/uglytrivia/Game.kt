@@ -2,11 +2,13 @@ package com.abogomazov.uglytrivia
 
 import java.util.*
 
-class Game {
+class Game(
+    private val maxPlayers: Int = 6
+) {
     private val players = ArrayList<Any>()
-    private val places = IntArray(6)
-    private val purses = IntArray(6)
-    private val inPenaltyBox = BooleanArray(6)
+    private val places = IntArray(maxPlayers)
+    private val purses = IntArray(maxPlayers)
+    private val inPenaltyBox = BooleanArray(maxPlayers)
 
     private val popQuestions = LinkedList<Any>()
     private val scienceQuestions = LinkedList<Any>()
